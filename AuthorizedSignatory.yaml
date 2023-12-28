@@ -52,31 +52,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /authorizedSignatory/{authorizedSignatoryId}:
-    delete:
-      tags:
-        - Authorized Signatory
-      summary:  delete an Authorized Signatory
-      description: delete an Authorized Signatory
-      operationId: deleteAuthorizedSignatory
-      parameters:
-        - $ref: '#/components/parameters/authorizedSignatoryId'
-      responses:
-        '200':
-          description: Authorized Signatory deleted successfully
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-
 components:
   schemas:
     createAuthorizedSignatoryRequest:
