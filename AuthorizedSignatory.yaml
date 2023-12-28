@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Authorized Signatory
+  description: APIs for Authorized Signatory
+  version: 1.0.0
+paths:
+  /authorizedSignatory:
+    post:
+      tags:
+        - Authorized Signatory
+      summary:  Create a New Authorized Signatory
+      description: Create a New Authorized Signatory
+      operationId: createAuthorizedSignatory
+      requestBody:
+          $ref: '#/components/requestBodies/createAuthorizedSignatoryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/createAuthorizedSignatoryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /authorizedSignatory/corporateId:
+    get:
+      tags:
+        - Authorized Signatory
+      summary:  Fetch an Authorized Signatory
+      description: Fetch an Authorized Signatory
+      operationId: fetchauthorizedSignatory
+      parameters:
+        - $ref: '#/components/parameters/corporateId'
+      responses:
+        '200':
+          $ref: '#/components/responses/fetchAuthorizedSignatoryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /authorizedSignatory/{authorizedSignatoryId}:
+    delete:
+      tags:
+        - Authorized Signatory
+      summary:  delete an Authorized Signatory
+      description: delete an Authorized Signatory
+      operationId: deleteAuthorizedSignatory
+      parameters:
+        - $ref: '#/components/parameters/authorizedSignatoryId'
+      responses:
+        '200':
+          description: Authorized Signatory deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    createAuthorizedSignatoryRequest:
+      type: object
+      properties:
+        individualId: 
+          type: string
+          format: string
+        corporateId:
+          type: string
+          format: string
+        entityStatus:
+          type: integer
+          format: number
+    createAuthorizedSignatoryResponse:
+      type: object
+      properties:
+        authorizedSignatoryId:
+          type: string
+          format: string
+    fetchAuthorizedSignatoryResponse:
+      type: object
+      properties:
+        individualId: 
+          type: string
+          format: string
+        corporateId:
+          type: string
+          format: string
+        entityStatus:
+          type: integer
+          format: number
+        authorizedSignatoryId:
+          type: string
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          format: string
+        status:
+          type: string
+          format: string
+        message:
+          type: string
+          format: string
+    
+  parameters:
+    corporateId:
+      name: corporateId
+      in: query
+      required: true
+      schema:
+        type: string
+    authorizedSignatoryId:
+      name: authorizedSignatoryId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    createAuthorizedSignatoryRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createAuthorizedSignatoryRequest'
+  responses:
+    fetchAuthorizedSignatoryResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/fetchAuthorizedSignatoryResponse' 
+    createAuthorizedSignatoryResponse:
+        description: Account user created
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/createAuthorizedSignatoryResponse' 
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
